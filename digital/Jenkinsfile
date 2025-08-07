@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'git@github.com:liopalacios/sb-security-base.git'
+                checkout scm
             }
         }
 
