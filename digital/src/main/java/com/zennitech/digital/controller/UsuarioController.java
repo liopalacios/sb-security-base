@@ -21,6 +21,8 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request) {
+        System.out.printf("este es un controller");
+        System.out.printf("test 03");
         System.out.println("Login request: " + request.getUsername() + " - " + encoder.encode(request.getPassword()) + "..."  );
         return authService.login(request.getUsername(), request.getPassword());
     }

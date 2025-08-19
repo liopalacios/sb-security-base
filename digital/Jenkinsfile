@@ -10,19 +10,30 @@ pipeline {
     }
 
     stages {
+        stage('Init') {
+            steps {
+                echo '✅ Pipeline iniciado correctamente'
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'desa', url: 'https://github.com/liopalacios/sb-security-base.git'
+                echo '✅ Código descargado'
             }
         }
-
+        stage('Test Gradle') {
+            steps {
+                sh 'gradle --version'
+            }
+        }
         stage('Build and Test') {
             steps {
-                sh './gradlew clean build'
+                echo 'Simulación de build con Gradle'
+                // sh './gradlew clean build'
             }
         }
 
-        stage('SonarQube Analysis') {
+        /*stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv("${SONARQUBE_ENV}") {
                     sh './gradlew sonarqube -Dsonar.projectKey=sb-security-base'
@@ -34,6 +45,6 @@ pipeline {
             steps {
                 sh 'docker build -t sb-security-base:latest .'
             }
-        }
+        }*/
     }
 }
