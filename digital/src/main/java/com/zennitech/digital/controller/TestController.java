@@ -17,6 +17,7 @@ public class TestController {
 
     @GetMapping("/bcrypt")
     public String encode(@RequestParam String pwd) {
+        System.out.print("DESPLEGANDO");
         System.out.println("Encoded in password: " + pwd + " -> " + encoder.encode(pwd) + "\n" );
         return encoder.encode(pwd);
     }
