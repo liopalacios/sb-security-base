@@ -25,4 +25,8 @@ public class UsuarioController {
     public String ping() {
         return "pong - " + System.currentTimeMillis();
     }
+    @GetMapping("/pong")
+    public String pong() {
+        return "pong ping- " + System.currentTimeMillis();
+    }
 }
