@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Checkout') {
             steps {
-                echo 'Hola, el Jenkinsfile funciona!'
+                git branch: 'desa',
+                    url: 'https://github.com/liopalacios/sb-security-base.git',
+                    credentialsId: 'github-lio'
             }
         }
     }
