@@ -21,12 +21,12 @@ public class UsuarioController {
         System.out.println("Login request: " + request.getUsername() + " - " + encoder.encode(request.getPassword()) + "..."  );
         return authService.login(request.getUsername(), request.getPassword());
     }
-    @GetMapping("/ping")
+    @GetMapping("/pingpong")
     public String ping() {
         return "pong - " + System.currentTimeMillis();
     }
-    @GetMapping("/pong")
-    public String pong() {
-        return "pong ping- " + System.currentTimeMillis();
+    @GetMapping("/fechahoy")
+    public String getFecha() {
+        return "fecha - " + System.currentTimeMillis();
     }
 }
