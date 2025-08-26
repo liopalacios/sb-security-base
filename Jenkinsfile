@@ -2,21 +2,26 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                echo "Compilando en la rama ${env.GIT_BRANCH}"
-                sh './mvnw clean package -DskipTests'
+                // Clona el repositorio y la rama que seleccionaste en el job
+                checkout scm
             }
         }
 
-        stage('Deploy') {
-            when {
-                expression { env.GIT_BRANCH == "origin/main" }
-            }
+        stage('Build') {
             steps {
-                echo "🚀 Haciendo deploy en MAIN"
-                // tus pasos de deploy
+                // Compila y genera el JAR
+                sh 'mvn clean package -DskipTests'
             }
+        }
+    }
+    post {
+        success {
+            echo "✅ Build exitoso. JAR generado en target/"
+        }
+        failure {
+            echo "❌ Error en el build."
         }
     }
 }
