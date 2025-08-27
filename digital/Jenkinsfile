@@ -1,18 +1,30 @@
 pipeline{
     agent any
+    tools {
+        maven 'M3'   // usa el Maven que configuraste en Global Tools
+    }
     stages{
-        stage('Prueba'){
+        stage('Checkout'){
             steps{
-                bat 'echo "✅ Jenkinsfile detectado y ejecutándose en branch desa"'
+                // Clona el repositorio y la rama que seleccionaste en el job
+                checkout scm
+            }
+        }
+
+        stage('Build'){
+            steps{
+                echo "🚀 Sí está ejecutando este Jenkinsfile"
+                // Compila y genera el JAR
+                sh 'mvn clean package -DskipTests'
             }
         }
     }
-}
-post{
-    success{
-        bat 'echo "buil successfull"'
-    }
-    failure{
-        bat 'echo "buil error"'
+    post{
+        success{
+            echo "✅ Build exitoso. JAR generado en target/"
+        }
+        failure{
+            echo "❌ Error en el build."
+        }
     }
 }
