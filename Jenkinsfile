@@ -1,6 +1,8 @@
 pipeline{
     agent any
-
+    tools {
+        maven 'M3'   // usa el Maven que configuraste en Global Tools
+    }
     stages{
         stage('Checkout'){
             steps{
