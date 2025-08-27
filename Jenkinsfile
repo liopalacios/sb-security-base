@@ -1,0 +1,10 @@
+pipeline {
+    agent any
+    stages {
+        stage('Prueba') {
+            steps {
+                echo "✅ Jenkinsfile detectado y ejecutándose en branch desa"
+            }
+        }
+    }
+}
