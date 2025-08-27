@@ -15,7 +15,9 @@ pipeline{
             steps{
                 echo "🚀 Sí está ejecutando este Jenkinsfile"
                 // Compila y genera el JAR
-                sh 'mvn clean package -DskipTests'
+                dir('digital') {
+                    sh './gradlew build'  // usando wrapper
+                }
             }
         }
     }
