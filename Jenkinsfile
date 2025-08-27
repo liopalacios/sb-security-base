@@ -9,9 +9,9 @@ pipeline {
                     credentialsId: 'github-lio'
             }
         }
-        stage('Build') {
+        stage('Prueba') {
             steps {
-                echo "Compilando proyecto..."
+                echo "✅ Jenkinsfile detectado y ejecutándose en branch desa"
             }
         }
     }
