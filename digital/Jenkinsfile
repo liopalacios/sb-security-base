@@ -1,28 +1,10 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
+        stage('Prueba') {
             steps {
-                // Clona el repositorio y la rama que seleccionaste en el job
-                checkout scm
+                echo "✅ Jenkinsfile detectado y ejecutándose en branch desa"
             }
-        }
-
-        stage('Build') {
-            steps {
-                echo "🚀 Sí está ejecutando este Jenkinsfile"
-                // Compila y genera el JAR
-                sh 'mvn clean package -DskipTests'
-            }
-        }
-    }
-    post {
-        success {
-            echo "✅ Build exitoso. JAR generado en target/"
-        }
-        failure {
-            echo "❌ Error en el build."
         }
     }
 }
