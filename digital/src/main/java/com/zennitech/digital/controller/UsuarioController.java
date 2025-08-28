@@ -25,8 +25,8 @@ public class UsuarioController {
     public String ping() {
         return "pong - " + System.currentTimeMillis();
     }
-    @GetMapping("/fechahoyma")
-    public String getFechahoyma() {
+    @GetMapping("/fechahoymames")
+    public String getFechahoymames() {
         return "fecha de hoy mana mes - " + System.currentTimeMillis();
     }
 }
