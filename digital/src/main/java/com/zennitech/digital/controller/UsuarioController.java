@@ -21,11 +21,11 @@ public class UsuarioController {
         System.out.println("Login request: " + request.getUsername() + " - " + encoder.encode(request.getPassword()) + "..."  );
         return authService.login(request.getUsername(), request.getPassword());
     }
-    @GetMapping("/pingpong")
+    @GetMapping("/obtenerfechahora")
     public String ping() {
-        return "pong - " + System.currentTimeMillis();
+        return "fecha hora - " + System.currentTimeMillis();
     }
-    @GetMapping("/fechahoymames")
+    @GetMapping("/obtenermes")
     public String getFechahoymames() {
         return "fecha de hoy mana mes - " + System.currentTimeMillis();
     }
