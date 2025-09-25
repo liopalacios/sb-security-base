@@ -37,7 +37,9 @@ public class UsuarioController {
     @GetMapping("/usuarios")
     public List<UsuarioModel> listarUsuarios() {
         return List.of(
-                new UsuarioModel(1L, "Ana", "ana@example.com",null,null)
+                new UsuarioModel(1L, "Ana", "ana@example.com",null,null),
+                new UsuarioModel(2L, "Pedro", "pedro@example.com",null, null),
+                new UsuarioModel(3L, "Pablo", "pablo@example.com",null, null)
         );
     }
 }
