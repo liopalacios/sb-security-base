@@ -38,8 +38,6 @@ public class UsuarioController {
     public List<UsuarioModel> listarUsuarios() {
         return List.of(
                 new UsuarioModel(1L, "Ana", "ana@example.com",null,null),
-                new UsuarioModel(2L, "Juan", "juan@example.com",null, null),
-                new UsuarioModel(3L, "Juana", "juana@example.com",null, null),
                 new UsuarioModel(4L, "Paola", "paola@example.com",null, null),
                 new UsuarioModel(5L, "Pablo", "pablo@example.com",null, null)
         );
