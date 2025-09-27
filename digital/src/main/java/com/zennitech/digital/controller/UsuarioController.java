@@ -34,4 +34,11 @@ public class UsuarioController {
         return "fecha de hoy mana mes - " + System.currentTimeMillis();
     }
 
+    @GetMapping("/usuarios")
+    public List<UsuarioModel> listarUsuarios() {
+        return List.of(
+                new UsuarioModel(1L, "Ana", "ana@example.com",null,null),
+                new UsuarioModel(3L, "Pablo", "pablo@example.com",null, null)
+        );
+    }
 }
