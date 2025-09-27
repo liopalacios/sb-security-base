@@ -4,7 +4,7 @@ pipeline{
         maven 'M3'   // usa el Maven que configuraste en Global Tools
     }
     environment {
-        SONARQUBE_ENV = 'sonarqube'   // Debe coincidir con el nombre configurado en Jenkins
+        SONARQUBE_ENV = 'Sonarqube'   // Debe coincidir con el nombre configurado en Jenkins
     }
     stages{
         stage('Init') {
