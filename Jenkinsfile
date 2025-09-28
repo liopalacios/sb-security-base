@@ -38,7 +38,7 @@ pipeline{
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv("${SONARQUBE_ENV}") {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=sb-security-base'
+                    sh './gradlew sonarqube -Dsonar.projectKey=sb-security-base'
                 }
             }
         }
