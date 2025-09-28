@@ -39,7 +39,7 @@ pipeline{
             steps {
                 dir('digital') {
                     withSonarQubeEnv("${SONARQUBE_ENV}") {
-                        sh './gradlew sonar -Dsonar.projectKey=sb-security-base -Dsonar.host.url=http://sonarqube:9000'
+                        sh './gradlew sonar -Dsonar.projectKey=sb-security-base -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=sqa_7f1a122fb5c42f762ca8d484bfd6c7bd185b99bf'
                     }
                 }
             }
