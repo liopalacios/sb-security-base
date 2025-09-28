@@ -37,8 +37,10 @@ pipeline{
         }
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv("${SONARQUBE_ENV}") {
-                    sh './gradlew sonarqube -Dsonar.projectKey=sb-security-base'
+                dir('digital') {
+                    withSonarQubeEnv("${SONARQUBE_ENV}") {
+                        sh './gradlew sonarqube -Dsonar.projectKey=sb-security-base'
+                    }
                 }
             }
         }
