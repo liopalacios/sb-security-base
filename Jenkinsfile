@@ -5,6 +5,8 @@ pipeline{
     }
     environment {
         SONARQUBE_ENV = 'Sonarqube'   // Debe coincidir con el nombre configurado en Jenkins
+        DOCKER_IMAGE = "sb-security-base"   // nombre de tu app/imagen
+        DOCKER_TAG   = "latest"             // etiqueta (puede ser latest, 1.0.0, etc.)
     }
     stages{
         stage('Init') {
@@ -53,12 +55,22 @@ pipeline{
                 }
             }
         }
-         stage('Deploy') {
-            steps {
-                echo '🚀 Desplegando aplicación (solo se ejecuta si el Quality Gate fue OK)'
-                // Aquí irían tus pasos reales de despliegue: docker build/push, kubectl, etc.
-            }
-        }
+        stage('Build Docker Image') {
+             steps {
+                 dir('digital') {
+                     sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} -f Dockerfile ."
+                 }
+             }
+         }
+
+        stage('Run Docker Container') {
+             steps {
+                 sh """
+                     docker rm -f ${DOCKER_IMAGE} || true
+                     docker run -d --name ${DOCKER_IMAGE} -p 8201:8201 ${DOCKER_IMAGE}:${DOCKER_TAG}
+                 """
+             }
+         }
     }
     post{
         success{
