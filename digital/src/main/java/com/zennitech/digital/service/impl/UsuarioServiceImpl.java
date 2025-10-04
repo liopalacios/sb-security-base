@@ -1,11 +1,13 @@
 package com.zennitech.digital.service.impl;
 
 import com.zennitech.digital.config.JwtUtil;
+import com.zennitech.digital.exception.UsuarioException;
 import com.zennitech.digital.model.UsuarioModel;
 import com.zennitech.digital.pojo.AuthResponse;
 import com.zennitech.digital.repository.UsuarioJdbcRepository;
 import com.zennitech.digital.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioJdbcRepository usuarioJdbcRepository;
@@ -34,13 +37,13 @@ public class UsuarioServiceImpl implements UsuarioService {
         Optional<UsuarioModel> userOpt = usuarioJdbcRepository.findByUsername(username);
 
         if (userOpt.isEmpty()) {
-            throw new RuntimeException("Usuario no encontrado");
+            throw new UsuarioException("Usuario no encontrado");
         }
 
         UsuarioModel user = userOpt.get();
-        System.out.println(password+" "+user.getPassword()  );
+        log.info(password+" "+user.getPassword()  );
         if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Contraseña incorrecta");
+            throw new UsuarioException("Contraseña incorrecta");
         }
 
         String token = jwtUtil.generateToken(user.getUsername(), user.getRoles());

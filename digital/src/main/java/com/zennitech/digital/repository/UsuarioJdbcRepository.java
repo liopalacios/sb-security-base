@@ -18,19 +18,20 @@ public class UsuarioJdbcRepository {
     public Optional<UsuarioModel> findByUsername(String username) {
         try {
             String sql = "SELECT id, username, password FROM usuario WHERE username = ?";
-            UsuarioModel user = jdbc.queryForObject(sql, new Object[]{username}, (rs, rowNum) -> {
+            UsuarioModel user = jdbc.queryForObject(sql,  (rs, rowNum) -> {
                 UsuarioModel u = new UsuarioModel();
                 u.setId(rs.getLong("id"));
                 u.setUsername(rs.getString("username"));
                 u.setPassword(rs.getString("password"));
                 return u;
-            });
-            if (user == null) return null;
+            }, username);
+            if (user == null) return  Optional.empty();
+
             // Obtener roles
             String rolesSql = "SELECT r.nombre FROM rol r " +
                     "INNER JOIN usuario_rol ur ON r.id = ur.rol_id " +
                     "WHERE ur.usuario_id = ?";
-            List<String> roles = jdbc.queryForList(rolesSql, new Object[]{user.getId()}, String.class);
+            List<String> roles = jdbc.queryForList(rolesSql,String.class,  user.getId());
             user.setRoles(roles);
 
             // Obtener accesos
@@ -38,7 +39,7 @@ public class UsuarioJdbcRepository {
                     "INNER JOIN usuario_rol ur ON a.rol_id = ur.rol_id " +
                     "INNER JOIN accesos ac on a.acceso_id = ac.id " +
                     "WHERE ur.usuario_id = ?";
-            List<String> accesos = jdbc.queryForList(accesosSql, new Object[]{user.getId()}, String.class);
+            List<String> accesos = jdbc.queryForList(accesosSql,  String.class, user.getId());
             user.setAccesos(accesos);
 
             return Optional.of(user);

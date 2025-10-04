@@ -5,6 +5,7 @@ import com.zennitech.digital.pojo.AuthRequest;
 import com.zennitech.digital.pojo.AuthResponse;
 import com.zennitech.digital.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +15,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
+@Slf4j
 public class UsuarioController {
     private final PasswordEncoder encoder;
-    @Autowired
-    private UsuarioService authService;
+
+    private final UsuarioService authService;
 
     @PostMapping("/login")
     public AuthResponse login(@RequestBody AuthRequest request) {
-        System.out.println("Login request: " + request.getUsername() + " - " + encoder.encode(request.getPassword()) + "..."  );
+        log.info("Login request: " + request.getUsername() + " - " + encoder.encode(request.getPassword()) + "..."  );
         return authService.login(request.getUsername(), request.getPassword());
     }
     @GetMapping("/obtenerfechahora")
