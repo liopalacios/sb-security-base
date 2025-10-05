@@ -9,4 +9,4 @@ spring:
 jwt:
   secret: Yz8nWpV2rQ5dBmX1sK9gLtA3vFzJeT7oN6uHbE4cXqMdRySaZwCoPlGtExHkUjNv
 server:
-  port: 8202
+  port: 8201
