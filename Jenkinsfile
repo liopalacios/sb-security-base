@@ -41,7 +41,7 @@ pipeline{
             steps {
                 dir('digital') {
                     withSonarQubeEnv("${SONARQUBE_ENV}") {
-                        sh './gradlew sonar -Dsonar.projectKey=sb-security-base -Dsonar.host.url=http://sonarqube:9000 -Dsonar.token=sqa_7f1a122fb5c42f762ca8d484bfd6c7bd185b99bf'
+                        sh './gradlew test jacocoTestReport sonar -Dsonar.projectKey=sb-security-base -Dsonar.host.url=http://sonarqube:9000 -Dsonar.token=sqa_7f1a122fb5c42f762ca8d484bfd6c7bd185b99bf'
                     }
                 }
             }
