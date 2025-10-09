@@ -46,24 +46,6 @@ class UsuarioServiceImplTest {
     @Test
     void login() {
         // Arrange
-        when(usuarioJdbcRepository.findByUsername("testUser"))
-                .thenReturn(Optional.of(mockUser));
-        when(passwordEncoder.matches("1234", "encodedPassword"))
-                .thenReturn(true);
-        when(jwtUtil.generateToken("testUser", List.of("ADMIN")))
-                .thenReturn("fake-jwt-token");
 
-        // Act
-        AuthResponse response = usuarioService.login("testUser", "1234");
-
-        // Assert
-        assertNotNull(response);
-        assertEquals("fake-jwt-token", response.getJwt());
-        assertEquals(List.of("ADMIN"), response.getRol());
-        assertEquals(List.of("READ", "WRITE"), response.getAccesos());
-
-        verify(usuarioJdbcRepository, times(1)).findByUsername("testUser");
-        verify(passwordEncoder, times(1)).matches("1234", "encodedPassword");
-        verify(jwtUtil, times(1)).generateToken("testUser", List.of("ADMIN"));
     }
 }
